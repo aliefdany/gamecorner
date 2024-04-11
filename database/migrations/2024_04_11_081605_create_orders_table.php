@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('console_available_id')->constrained();
+            $table->foreignId('schedule_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->enum('status', ['AVAILABLE', 'ORDERED']);
         });
