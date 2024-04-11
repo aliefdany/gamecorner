@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Console;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ConsoleAvailable>
@@ -17,7 +19,9 @@ class ConsoleAvailableFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'console_id' => Console::factory(),
+            'code' => fake()->unique()->lexify('console-????'),
+            'status' => 'AVAILABLE',
         ];
     }
 }

@@ -12,13 +12,7 @@ class ConsoleSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
-        $consoles = array('Playstation 5', 'Xbox One', 'PC');
-
-        foreach ($consoles as $console) {
-            $consoleMod = new Console;
-            $consoleMod->name = $console;
-            $consoleMod->save();
-        }     
+    {      
+        Console::factory()->count(3)->create();  
     }
 }
