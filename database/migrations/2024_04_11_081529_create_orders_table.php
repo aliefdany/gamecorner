@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('console_available_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->enum('status', ['AVAILABLE', 'ORDERED']);
         });
     }
 
