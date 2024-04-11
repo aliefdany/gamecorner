@@ -18,6 +18,7 @@ return new class extends Migration
             $table->time('start');
             $table->time('end');
             $table->enum('status', ['AVAILABLE', 'ORDERED']);
+            $table->foreignId('console_available_id')->constrained();
         });
     }
 

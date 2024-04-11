@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ConsoleAvailable;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Schedule>
@@ -17,7 +18,11 @@ class ScheduleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "date" => fake()->date("now"),
+            "start" => fake()->time(),
+            "end" => fake()->time(),
+            "status" => "AVAILABLE",
+            'console_available_id' => ConsoleAvailable::factory(),
         ];
     }
 }
