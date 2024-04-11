@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('console_availables', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('user_id')->constrained();
+            $table->string('code');
+            $table->string('status');
         });
     }
 
