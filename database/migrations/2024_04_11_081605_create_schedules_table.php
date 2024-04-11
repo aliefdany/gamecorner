@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('date');
+            $table->time('start');
+            $table->time('end');
+            $table->enum('status', ['AVAILABLE', 'ORDERED']);
         });
     }
 
