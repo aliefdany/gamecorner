@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/book', BookingListController::class)->name('book');
+Route::get('/book', BookingListController::class)->middleware(['auth', 'verified'])->name('book');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
