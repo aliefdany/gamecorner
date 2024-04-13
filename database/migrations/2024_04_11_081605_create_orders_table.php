@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('schedule_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->enum('status', ['AVAILABLE', 'ORDERED']);
+            $table->unsignedSmallInteger('controller_amount');
         });
     }
 
