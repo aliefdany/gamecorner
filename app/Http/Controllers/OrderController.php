@@ -29,18 +29,16 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        // Request validation start
-
-        // Request validation end
-
+        $validated = $request->validated();
 
         $order = new Order;
 
-        $order->console_available_id = $request->console_available_id;
-        $order->schedule_id = $request->schedule_id;
+        $order->controller_amount = $validated['controller_amount']; 
+
         $order->user_id = $request->user()->id;
         $order->status = 'ORDERED'; 
-        $order->controller_amount = $request->controller_amount; 
+        $order->console_available_id = $request->console_available_id;
+        $order->schedule_id = $request->schedule_id;
 
         $order->save();
 

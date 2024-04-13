@@ -11,7 +11,8 @@ class StoreOrderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        // simple authorization rule, will improve later
+        return $this->user() != null;
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'controller_amount' => 'bail|required|numeric|min:1|max:2'
         ];
     }
 }

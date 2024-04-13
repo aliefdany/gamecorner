@@ -54,7 +54,6 @@
 
                                                     <x-text-input id="controller_amount" name="controller_amount"
                                                         type="number" class="mt-1 block w-3/4" value="1"
-                                                        min="1" max="2"
                                                         placeholder="{{ __('How many controller you need?') }}" />
 
 
