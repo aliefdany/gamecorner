@@ -31,7 +31,45 @@
                                             </div>
                                         </div>
                                         <x-primary-button x-data=""
-                                            x-on:click.prevent="$dispatch('open-modal', 'book-schedule')">{{ __('Book') }}</x-primary-button>
+                                            x-on:click.prevent="$dispatch('open-modal', 'book-schedule-{{ $sched->id }}')">
+                                            {{ __('Book') }}
+                                        </x-primary-button>
+
+                                        <x-modal name="book-schedule-{{ $sched->id }}" focusable>
+                                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                                @csrf
+                                                @method('delete')
+
+                                                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                                    {{ __('Do you want to book this schedule?') }}
+                                                </h2>
+
+                                                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                                                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                                                </p>
+
+                                                <div class="mt-6">
+                                                    <x-input-label for="controller-amount"
+                                                        value="{{ __('Controller Amount') }}" class="sr-only" />
+
+                                                    <x-text-input id="controller-amount" name="controller-amount"
+                                                        type="number" class="mt-1 block w-3/4" value="1"
+                                                        min="1" max="2"
+                                                        placeholder="{{ __('How many controller you need?') }}" />
+                                                </div>
+
+                                                <div class="mt-6 flex justify-end">
+                                                    <x-secondary-button x-on:click="$dispatch('close')">
+                                                        {{ __('Cancel') }}
+                                                    </x-secondary-button>
+
+
+                                                    <x-primary-button class="ms-3">
+                                                        {{ __('Book Now') }}
+                                                    </x-primary-button>
+                                                </div>
+                                            </form>
+                                        </x-modal>
                                     </li>
                                 @endforeach
                             </ul>
@@ -41,8 +79,6 @@
             @endforeach
         </ul>
 
-        <x-modal name="book-schedule" focusable>
-            {{ __('Hello World') }}
-        </x-modal>
+
     </section>
 </x-app-layout>

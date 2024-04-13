@@ -18,7 +18,7 @@ class BookingListController extends Controller
         ->join('console_availables', 'schedules.console_available_id','console_availables.id')
         ->join('consoles', 'console_availables.console_id', 'consoles.id')
         ->orderBy('consoles.name', 'asc')
-        ->select('schedules.*','console_availables.id', 'console_availables.code' ,'consoles.name')
+        ->select('schedules.*', 'console_availables.code' ,'consoles.name')
         ->get();
 
 
