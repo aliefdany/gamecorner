@@ -36,9 +36,9 @@
                                         </x-primary-button>
 
                                         <x-modal name="book-schedule-{{ $sched->id }}" focusable>
-                                            <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+                                            <form method="post" action="{{ route('order.store') }}" class="p-6">
                                                 @csrf
-                                                @method('delete')
+                                                @method('post')
 
                                                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                                                     {{ __('Do you want to book this schedule?') }}
@@ -49,13 +49,20 @@
                                                 </p>
 
                                                 <div class="mt-6">
-                                                    <x-input-label for="controller-amount"
+                                                    <x-input-label for="controller_amount"
                                                         value="{{ __('Controller Amount') }}" class="sr-only" />
 
-                                                    <x-text-input id="controller-amount" name="controller-amount"
+                                                    <x-text-input id="controller_amount" name="controller_amount"
                                                         type="number" class="mt-1 block w-3/4" value="1"
                                                         min="1" max="2"
                                                         placeholder="{{ __('How many controller you need?') }}" />
+
+
+                                                    <x-text-input id="console_available_id" name="console_available_id"
+                                                        type="hidden" value="{{ $sched->console_available_id }}" />
+
+                                                    <x-text-input id="schedule_id" name="schedule_id" type="hidden"
+                                                        value="{{ $sched->id }}" />
                                                 </div>
 
                                                 <div class="mt-6 flex justify-end">
