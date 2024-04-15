@@ -9,8 +9,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/schedule', [ScheduleController::class, 'indexJoined'])->middleware(['auth', 'verified'])->name('schedule');
-Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->middleware(['auth', 'verified'])->name('schedule.show');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/schedule', [ScheduleController::class, 'indexJoined'])->name('schedule');
+    Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
+});
 
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth'])->name('order.store');
 
