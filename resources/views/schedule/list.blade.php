@@ -30,8 +30,14 @@
                                                 {{ $sched->status }}
                                             </div>
                                         </div>
-                                        <a class="block" href="{{ route('schedule.show', ['id' => $sched->id]) }}">
-                                            <x-primary-button class="h-full" type="button">
+                                        <a @disabled($sched->status == 'ORDERED')
+                                            tab-index="{{ $sched->status == 'ORDERED' ? -1 : 0 }}" class="block"
+                                            href="{{ $sched->status == 'ORDERED' ? '#' : route('schedule.show', ['id' => $sched->id]) }}">
+                                            <x-primary-button @class([
+                                                'bg-gray-800/50 dark:bg-gray-200/50 hover:bg-gray-800/50 hover:dark:bg-gray-200/50 focus:bg-gray-800/50 focus:dark:bg-gray-200/50' =>
+                                                    $sched->status == 'ORDERED',
+                                                'h-full',
+                                            ]) type="button">
                                                 {{ __('Book') }}
                                             </x-primary-button>
                                         </a>
