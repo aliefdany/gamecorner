@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/book', BookingListController::class)->middleware(['auth', 'verified'])->name('book');
+Route::get('/schedule', BookingListController::class)->middleware(['auth', 'verified'])->name('schedule');
 Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->middleware(['auth', 'verified'])->name('schedule.show');
 
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth'])->name('order.store');

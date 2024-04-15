@@ -14,7 +14,7 @@ class BookingListController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $bookingLists = DB::table('schedules')
+        $schedulesByConsole = DB::table('schedules')
         ->join('console_availables', 'schedules.console_available_id','console_availables.id')
         ->join('consoles', 'console_availables.console_id', 'consoles.id')
         ->orderBy('consoles.name', 'asc')
@@ -22,7 +22,7 @@ class BookingListController extends Controller
         ->get();
 
 
-        $bookingListsArray = json_decode(json_encode($bookingLists), true);
+        $bookingListsArray = json_decode(json_encode($schedulesByConsole), true);
 
         $grouped = array();
         foreach($bookingListsArray as $b) {
@@ -38,9 +38,9 @@ class BookingListController extends Controller
 
         // echo json_encode($grouped,JSON_PRETTY_PRINT);
 
-        $bookingLists = json_decode(json_encode($grouped));
+        $schedulesByConsole = json_decode(json_encode($grouped));
     
 
-        return view('book', ['bookingLists' => $bookingLists]);
+        return view('schedule.list', ['schedulesByConsole' => $schedulesByConsole]);
     }
 }

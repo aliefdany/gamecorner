@@ -7,7 +7,7 @@
 
     <section class="min-w-96 py-12">
         <ul class="space-y-12">
-            @foreach ($bookingLists as $available_console)
+            @foreach ($schedulesByConsole as $available_console)
                 <li>
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <span>
@@ -30,10 +30,11 @@
                                                 {{ $sched->status }}
                                             </div>
                                         </div>
-                                        <x-primary-button x-data=""
-                                            x-on:click.prevent="$dispatch('open-modal', 'book-schedule-{{ $sched->id }}')">
-                                            {{ __('Book') }}
-                                        </x-primary-button>
+                                        <a class="block" href="{{ route('schedule.show', ['id' => $sched->id]) }}">
+                                            <x-primary-button class="h-full" type="button">
+                                                {{ __('Book') }}
+                                            </x-primary-button>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
