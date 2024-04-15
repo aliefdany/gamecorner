@@ -105,6 +105,7 @@ class ScheduleController extends Controller
 
         $schedulesByConsole = json_decode(json_encode($grouped));
     
+        session()->flash('success', 'Success ordering schedule!');
 
         return view('schedule.list', ['schedulesByConsole' => $schedulesByConsole]);
     }
