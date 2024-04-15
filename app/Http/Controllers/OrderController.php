@@ -46,7 +46,7 @@ class OrderController extends Controller
 
         OrderCreated::dispatch($order);
 
-        return redirect('/book');
+        return redirect('/schedule');
     }
 
     /**
