@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Events\OrderCreated;
+
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
@@ -41,6 +43,8 @@ class OrderController extends Controller
         $order->schedule_id = $request->schedule_id;
 
         $order->save();
+
+        OrderCreated::dispatch($order);
 
         return redirect('/book');
     }
