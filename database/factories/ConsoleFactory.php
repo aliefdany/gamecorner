@@ -16,6 +16,8 @@ class ConsoleFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->seed(8927);
+        
         return [
             'name' => fake()->unique()->randomElements(['Playstation 5', 'Xbox One', 'PC'], 1)[0]
         ];

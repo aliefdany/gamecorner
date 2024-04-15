@@ -18,6 +18,8 @@ class ConsoleAvailableFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->seed(1234);
+
         return [
             'console_id' => Console::factory(),
             'code' => fake()->unique()->lexify('console-????'),

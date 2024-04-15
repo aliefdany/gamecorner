@@ -17,6 +17,8 @@ class ScheduleFactory extends Factory
      */
     public function definition(): array
     {
+        fake()->seed(4273);
+
         return [
             "date" => fake()->date("now"),
             "start" => fake()->time(),
