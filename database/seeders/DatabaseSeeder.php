@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        fake()->seed(321563);
+
         $this->call([
             ConsoleAvailableSeeder::class,
             ScheduleSeeder::class
