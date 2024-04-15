@@ -26,7 +26,12 @@
                                             <span class="text-gray-900 dark:text-gray-100">
                                                 {{ $sched->start }}-{{ $sched->end }}
                                             </span>
-                                            <div class="text-gray-900 dark:text-gray-100">
+                                            <div @class([
+                                                'text-red-700 border-red-700 bg-red-300' => $sched->status == 'ORDERED',
+                                                'text-green-700 border-green-700 bg-green-300' =>
+                                                    $sched->status == 'AVAILABLE',
+                                                'font-semibold border-2 p-2 rounded-lg text-center text-sm',
+                                            ])>
                                                 {{ $sched->status }}
                                             </div>
                                         </div>
