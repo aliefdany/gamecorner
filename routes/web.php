@@ -4,12 +4,14 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingListController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ScheduleController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/book', BookingListController::class)->middleware(['auth', 'verified'])->name('book');
+Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->middleware(['auth', 'verified'])->name('schedule.show');
 
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth'])->name('order.store');
 

@@ -6,6 +6,8 @@ use App\Models\Schedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
 
+use Illuminate\Support\Facades\DB;
+
 class ScheduleController extends Controller
 {
     /**
@@ -35,9 +37,18 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Schedule $schedule)
+    public function show(string $id)
     {
-        //
+        // echo $schedule;
+        $sched = DB::table('schedules')
+        ->join('console_availables', 'schedules.console_available_id','console_availables.id')
+        ->join('consoles', 'console_availables.console_id', 'consoles.id')
+        ->orderBy('consoles.name', 'asc')
+        ->where('schedules.id', $id)
+        ->select('schedules.*', 'console_availables.code' ,'consoles.name')
+        ->get();
+
+        return view('schedule.detail', ['schedule' => $sched->first()]);
     }
 
     /**
