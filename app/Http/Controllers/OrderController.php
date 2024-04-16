@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Events\OrderCreated;
+
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -42,7 +46,11 @@ class OrderController extends Controller
 
         $order->save();
 
-        return redirect('/book');
+        OrderCreated::dispatch($order);
+
+        session()->flash('success', 'Success ordering schedule!');
+
+        return redirect('/schedule');
     }
 
     /**
@@ -75,5 +83,28 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    /**
+     * Index joined
+     */
+    public function indexJoined(Request $request) {
+        $orderHistory = DB::table('orders')
+        ->join('console_availables', 'orders.console_available_id','console_availables.id')
+        ->join('consoles', 'console_availables.console_id', 'consoles.id')
+        ->join('schedules', 'orders.schedule_id', 'schedules.id')
+        ->where('orders.user_id','=', $request->user()->id)
+        ->orderBy('schedules.date', 'asc')
+        ->select('orders.id', 
+        'orders.status',
+        'orders.controller_amount', 
+        'orders.console_available_id',
+        'consoles.name', 
+        'schedules.date', 
+        'schedules.start',
+        'schedules.end')
+        ->get();
+
+        return view('dashboard',['orderHistory' => $orderHistory]);
     }
 }

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
+
 
 class ScheduleController extends Controller
 {
@@ -78,12 +81,20 @@ class ScheduleController extends Controller
     /**
      * View joined schedules data
      */
-    public function indexJoined() {
+    public function indexJoined(Request $request) {
+        $date = '';
+        if(!$request->query('date')) {
+            $date = now();
+        } else {
+            $date = Carbon::createFromFormat('d/m/Y', $request->query('date'));
+        }
+
         $schedulesByConsole = DB::table('schedules')
         ->join('console_availables', 'schedules.console_available_id','console_availables.id')
         ->join('consoles', 'console_availables.console_id', 'consoles.id')
         ->orderBy('consoles.name', 'asc')
         ->select('schedules.*', 'console_availables.code' ,'consoles.name')
+        ->whereDate('date',$date->format('Y-d-m'))
         ->get();
 
 
@@ -101,10 +112,7 @@ class ScheduleController extends Controller
             }
         }
 
-        // echo json_encode($grouped,JSON_PRETTY_PRINT);
-
         $schedulesByConsole = json_decode(json_encode($grouped));
-    
 
         return view('schedule.list', ['schedulesByConsole' => $schedulesByConsole]);
     }
