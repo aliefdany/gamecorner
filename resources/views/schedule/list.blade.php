@@ -27,7 +27,7 @@
                     'firstDay' => 1,
                     'reposition' => 'top-aligned',
                     'disableWeekends' => 'true',
-                ]" />
+                ]" autofocus='off' />
 
             <x-primary-button class="ms-3">
                 {{ __('Search') }}
@@ -99,7 +99,6 @@
                 </li>
             @endforeach
         </ul>
-
-
     </section>
 </x-app-layout>
+@bukScripts

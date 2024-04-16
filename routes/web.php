@@ -17,9 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::post('/order', [OrderController::class, 'store'])->middleware(['auth'])->name('order.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [OrderController::class, 'indexJoined'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

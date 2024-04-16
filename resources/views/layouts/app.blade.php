@@ -39,7 +39,6 @@
             {{ $slot }}
         </main>
     </div>
-    @bukScripts
 </body>
 
 </html>
