@@ -13,8 +13,26 @@
         </h2>
     </x-slot>
 
-    <section class="min-w-96 py-12">
-        <ul class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <section class="min-w-96 py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <form class="mb-6 flex gap-2" method="get" action="{{ route('schedule') }}">
+            @csrf
+            @method('get')
+
+            <x-input-label for="date" value="{{ __('Choose Date') }}" class="sr-only" />
+            <x-pikaday id="date" placeholder="Choose the date" value="{{ request()->query('date') }}"
+                class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+                autocomplete='off' name="date" :options="[
+                    'firstDay' => 1,
+                    'reposition' => 'top-aligned',
+                    'disableWeekends' => true,
+                ]" />
+
+            <x-primary-button class="ms-3">
+                {{ __('Search') }}
+            </x-primary-button>
+        </form>
+
+        <ul class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
             @foreach ($schedulesByConsole as $available_console)
                 <li>
                     <div class="">

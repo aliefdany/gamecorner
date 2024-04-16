@@ -37,7 +37,7 @@ return [
         // 'mapbox' => Components\Maps\Mapbox::class,
         // 'markdown' => Components\Markdown\Markdown::class,
         // 'password' => Components\Forms\Inputs\Password::class,
-        // 'pikaday' => Components\Forms\Inputs\Pikaday::class,
+        'pikaday' => Components\Forms\Inputs\Pikaday::class,
         // 'social-meta' => Components\Layouts\SocialMeta::class,
         // 'textarea' => Components\Forms\Inputs\Textarea::class,
         // 'toc' => Components\Markdown\ToC::class,
