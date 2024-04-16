@@ -1,3 +1,11 @@
+@php
+    function convertTimeFormat($timeString)
+    {
+        $time = DateTime::createFromFormat('H:i:s', $timeString);
+        return $time->format('H:i');
+    }
+@endphp
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -22,10 +30,18 @@
                             <ul class="px-4 divide-y divide-dashed">
                                 @foreach ($available_console->schedules as $sched)
                                     <li class="py-4 flex justify-between">
-                                        <div>
-                                            <span class="text-gray-900 dark:text-gray-100">
-                                                {{ $sched->start }}-{{ $sched->end }}
-                                            </span>
+                                        <div class="space-y-2">
+                                            <div class="flex gap-2 items-center">
+                                                <div
+                                                    class="text-orange-700 border-2 border-orange-700 p-2 bg-orange-300 rounded-lg">
+                                                    {{ convertTimeFormat($sched->start) }}
+                                                </div>
+                                                -
+                                                <div
+                                                    class="text-orange-700 border-2 border-orange-700 p-2 bg-orange-300 rounded-lg">
+                                                    {{ convertTimeFormat($sched->end) }}
+                                                </div>
+                                            </div>
                                             <div @class([
                                                 'text-red-700 border-red-700 bg-red-300' => $sched->status == 'ORDERED',
                                                 'text-green-700 border-green-700 bg-green-300' =>
