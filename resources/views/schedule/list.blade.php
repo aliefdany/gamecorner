@@ -45,13 +45,15 @@
             @foreach ($schedulesByConsole as $available_console)
                 <li>
                     <div class="">
-                        <span>
-                            {{ $available_console->name }}
-                        </span>
-                        -
-                        <span>
-                            {{ $available_console->console_available_id }}
-                        </span>
+                        <div class="mb-2">
+                            <span class="text-lg font-semibold">
+                                {{ $available_console->name }}
+                            </span>
+                            -
+                            <span class="text-lg font-semibold">
+                                (Console {{ $available_console->console_available_id }})
+                            </span>
+                        </div>
 
                         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                             <ul class="px-4 divide-y divide-dashed">
