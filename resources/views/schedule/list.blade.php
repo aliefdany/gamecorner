@@ -14,10 +14,10 @@
     </x-slot>
 
     <section class="min-w-96 py-12">
-        <ul class="space-y-12">
+        <ul class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
             @foreach ($schedulesByConsole as $available_console)
                 <li>
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="">
                         <span>
                             {{ $available_console->name }}
                         </span>
