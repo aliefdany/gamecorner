@@ -14,6 +14,7 @@
     </x-slot>
 
     <section class="min-w-96 py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+
         <form class="mb-6 flex gap-2" method="get" action="{{ route('schedule') }}">
             @csrf
             @method('get')
@@ -32,6 +33,13 @@
             </x-primary-button>
         </form>
 
+        @empty($schedulesByConsole)
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                    {{ __('Ups, there are no schedules yet!') }}
+                </div>
+            </div>
+        @endempty
         <ul class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
             @foreach ($schedulesByConsole as $available_console)
                 <li>
