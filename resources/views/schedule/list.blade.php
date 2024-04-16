@@ -20,12 +20,13 @@
             @method('get')
 
             <x-input-label for="date" value="{{ __('Choose Date') }}" class="sr-only" />
-            <x-pikaday id="date" placeholder="Choose the date" value="{{ request()->query('date') }}"
+            <x-pikaday id="date" placeholder="Choose the date"
+                value="{{ request()->query('date') ? request()->query('date') : date('d/m/Y') }}"
                 class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
                 autocomplete='off' name="date" :options="[
                     'firstDay' => 1,
                     'reposition' => 'top-aligned',
-                    'disableWeekends' => true,
+                    'disableWeekends' => 'true',
                 ]" />
 
             <x-primary-button class="ms-3">

@@ -8,7 +8,8 @@ use App\Http\Requests\UpdateScheduleRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-use DateTime;
+use Illuminate\Support\Carbon;
+
 
 class ScheduleController extends Controller
 {
@@ -81,7 +82,12 @@ class ScheduleController extends Controller
      * View joined schedules data
      */
     public function indexJoined(Request $request) {
-        $date = DateTime::createFromFormat('d/m/Y', $request->query('date'));
+        $date = '';
+        if(!$request->query('date')) {
+            $date = now();
+        } else {
+            $date = Carbon::createFromFormat('d/m/Y', $request->query('date'));
+        }
 
         $schedulesByConsole = DB::table('schedules')
         ->join('console_availables', 'schedules.console_available_id','console_availables.id')
