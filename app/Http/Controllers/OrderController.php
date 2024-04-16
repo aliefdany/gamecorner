@@ -46,6 +46,8 @@ class OrderController extends Controller
 
         OrderCreated::dispatch($order);
 
+        session()->flash('success', 'Success ordering schedule!');
+
         return redirect('/schedule');
     }
 
