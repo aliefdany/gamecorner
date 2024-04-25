@@ -94,7 +94,7 @@ class ScheduleController extends Controller
         ->join('consoles', 'console_availables.console_id', 'consoles.id')
         ->orderBy('consoles.name', 'asc')
         ->select('schedules.*', 'console_availables.code' ,'consoles.name')
-        ->whereDate('date',$date->format('Y-d-m'))
+        ->whereDate('date',$date->format('Y-m-d'))
         ->get();
 
 
